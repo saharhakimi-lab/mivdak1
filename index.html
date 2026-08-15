@@ -1,0 +1,880 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>מתרגלים ומצליחים בבגרות בתקשוב | סימולטור המפץ הגדול 2.0</title>
+
+<!-- Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700;800;900&family=Assistant:wght@400;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --bg-main: #fbf9f5;
+  --card-bg: #ffffff;
+  --primary-blue: #2563eb;
+  --primary-blue-hover: #1d4ed8;
+  --soft-blue: #eff6ff;
+  --border-color: #e2e8f0;
+  --text-dark: #0f172a;
+  --text-muted: #64748b;
+  --accent-green: #10b981;
+  --accent-red: #ef4444;
+  --mentor-bg: #fff7ed;
+  --mentor-border: #fdba74;
+  --radius-lg: 20px;
+  --radius-md: 12px;
+  --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Assistant', 'Rubik', sans-serif;
+  background-color: var(--bg-main);
+  color: var(--text-dark);
+  line-height: 1.6;
+  padding-bottom: 80px;
+}
+
+/* ============ TOP NAV ============ */
+.top-nav {
+  max-width: 1200px;
+  margin: 20px auto 10px;
+  padding: 0 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.subject-badge {
+  background: #e0f2fe;
+  color: #0369a1;
+  padding: 8px 18px;
+  border-radius: 30px;
+  font-family: 'Rubik', sans-serif;
+  font-weight: 800;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 2px 6px rgba(3, 105, 161, 0.1);
+}
+
+.nav-left-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.brand-badge {
+  background: var(--primary-blue);
+  color: white;
+  padding: 8px 18px;
+  border-radius: 30px;
+  font-family: 'Rubik', sans-serif;
+  font-weight: 800;
+  font-size: 14px;
+}
+
+/* ============ HERO HEADER ============ */
+.hero-wrapper {
+  max-width: 1200px;
+  margin: 20px auto 35px;
+  padding: 0 20px;
+}
+
+.hero-content {
+  background: white;
+  border-radius: var(--radius-lg);
+  padding: 30px 40px;
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 30px;
+}
+
+.hero-text-right {
+  text-align: right;
+  flex: 1;
+}
+
+.hero-text-right h1 {
+  font-family: 'Rubik', sans-serif;
+  font-size: 32px;
+  font-weight: 900;
+  color: #0f172a;
+  letter-spacing: -0.5px;
+  margin-bottom: 8px;
+}
+
+.hero-text-right p {
+  color: var(--text-muted);
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.hero-logos-left {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  background: #f8fafc;
+  padding: 12px 20px;
+  border-radius: 50px;
+  border: 1px solid #e2e8f0;
+  perspective: 600px;
+}
+
+.hero-logo-img {
+  width: 75px;
+  height: 75px;
+  border-radius: 50%;
+  object-fit: contain;
+  background-color: #ffffff;
+  padding: 4px;
+  border: 3px solid white;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hero-logo-img:hover {
+  box-shadow: 0 0 20px rgba(37, 99, 235, 0.4);
+}
+
+@keyframes spinClockwise {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes spinCounterClockwise {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(-360deg); }
+}
+
+@keyframes spin3D {
+  0% { transform: rotate(0deg) rotateY(0deg); }
+  50% { transform: rotate(180deg) rotateY(180deg); }
+  100% { transform: rotate(360deg) rotateY(360deg); }
+}
+
+.hero-logo-img:nth-child(1) { animation: spinClockwise 12s linear infinite; }
+.hero-logo-img:nth-child(2) { animation: spinCounterClockwise 12s linear infinite; }
+.hero-logo-img:nth-child(3) { animation: spin3D 12s linear infinite; }
+
+/* ============ MENTOR SECTION ============ */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.mentor-card {
+  background: var(--mentor-bg);
+  border: 1px solid var(--mentor-border);
+  border-radius: var(--radius-lg);
+  padding: 22px 28px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.mentor-info {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.mentor-title {
+  font-family: 'Rubik', sans-serif;
+  font-size: 18px;
+  font-weight: 800;
+  color: #c2410c;
+}
+
+.mentor-desc {
+  font-size: 14px;
+  color: #ea580c;
+  font-weight: 700;
+}
+
+.motivation-btn {
+  background: linear-gradient(135deg, #f97316, #ea580c);
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 30px;
+  font-family: 'Rubik', sans-serif;
+  font-weight: 800;
+  font-size: 15px;
+  cursor: pointer;
+  box-shadow: 0 6px 18px rgba(249, 115, 22, 0.3);
+  transition: transform 0.2s ease;
+}
+
+.motivation-btn:hover {
+  transform: translateY(-2px);
+}
+
+/* ============ QUIZ PANEL ============ */
+.quiz-panel {
+  background: white;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-color);
+  padding: 35px;
+  box-shadow: var(--shadow);
+  text-align: center;
+  position: relative;
+}
+
+.question-counter {
+  font-family: 'Rubik', sans-serif;
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--primary-blue);
+  background: var(--soft-blue);
+  display: inline-block;
+  padding: 6px 18px;
+  border-radius: 30px;
+  margin-bottom: 20px;
+}
+
+.ip-display {
+  font-family: 'JetBrains Mono', monospace;
+  background: #0f172a;
+  color: #38bdf8;
+  padding: 18px 25px;
+  border-radius: var(--radius-md);
+  font-size: 2.2rem;
+  font-weight: 700;
+  direction: ltr;
+  text-align: center;
+  margin: 15px auto 25px;
+  max-width: 500px;
+  box-shadow: inset 0 2px 8px rgba(0,0,0,0.4);
+  letter-spacing: 2px;
+}
+
+.q-text {
+  font-family: 'Rubik', sans-serif;
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: var(--text-dark);
+  margin-bottom: 30px;
+}
+
+.options-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+  margin-bottom: 30px;
+}
+
+.opt-btn {
+  background: #f8fafc;
+  color: var(--text-dark);
+  border: 2px solid var(--border-color);
+  padding: 18px;
+  font-size: 1.1rem;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: 'Assistant', sans-serif;
+  font-weight: 700;
+}
+
+.opt-btn:hover {
+  border-color: var(--primary-blue);
+  background: var(--soft-blue);
+  transform: translateY(-2px);
+}
+
+.opt-btn.selected {
+  background: var(--primary-blue);
+  color: white;
+  border-color: var(--primary-blue);
+  box-shadow: 0 6px 15px rgba(37, 99, 235, 0.3);
+}
+
+.action-btn {
+  background: linear-gradient(135deg, #10b981, #059669);
+  color: white;
+  border: none;
+  padding: 14px 50px;
+  font-size: 1.2rem;
+  border-radius: 30px;
+  cursor: pointer;
+  box-shadow: 0 6px 18px rgba(16, 185, 129, 0.3);
+  transition: all 0.2s ease;
+  font-family: 'Rubik', sans-serif;
+  font-weight: 800;
+  display: none;
+  margin: 0 auto;
+}
+
+.action-btn:hover {
+  transform: scale(1.03);
+  box-shadow: 0 8px 22px rgba(16, 185, 129, 0.4);
+}
+
+.hidden { display: none !important; }
+
+/* RESULTS AREA */
+.result-score {
+  font-family: 'Rubik', sans-serif;
+  font-size: 5rem;
+  font-weight: 900;
+  margin: 15px 0;
+}
+
+.review-list {
+  max-height: 480px;
+  overflow-y: auto;
+  text-align: right;
+  border: 1px solid var(--border-color);
+  padding: 15px;
+  border-radius: var(--radius-md);
+  background: #f8fafc;
+  margin-top: 20px;
+}
+
+.review-item {
+  padding: 18px;
+  border-radius: var(--radius-md);
+  background: white;
+  margin-bottom: 12px;
+  border-right: 6px solid var(--border-color);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+}
+
+.review-item.correct { border-right-color: var(--accent-green); background: #f0fdf4; }
+.review-item.wrong { border-right-color: var(--accent-red); background: #fef2f2; }
+
+/* ============ FLOATING BOT CONTAINER & CALLOUT ============ */
+.bot-container {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.bot-callout {
+  background: linear-gradient(135deg, #1e293b, #0f172a);
+  color: #ffffff;
+  padding: 12px 20px;
+  border-radius: 30px;
+  font-family: 'Rubik', sans-serif;
+  font-weight: 800;
+  font-size: 16px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+  animation: bounce-callout 2.5s infinite ease-in-out;
+  cursor: pointer;
+  user-select: none;
+  border: 2px solid var(--primary-blue);
+  position: relative;
+}
+
+.bot-callout::after {
+  content: '';
+  position: absolute;
+  left: -8px;
+  top: 50%;
+  transform: translateY(-50%);
+  border-width: 6px 8px 6px 0;
+  border-style: solid;
+  border-color: transparent var(--primary-blue) transparent transparent;
+}
+
+@keyframes bounce-callout {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(-8px); }
+}
+
+.bot-widget {
+  width: 312px;
+  background: white;
+  border-radius: 20px;
+  border: 1px solid var(--border-color);
+  box-shadow: 0 15px 35px rgba(0,0,0,0.18);
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.bot-widget.collapsed {
+  width: 91px;
+  height: 91px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.bot-header {
+  background: #0f172a;
+  color: white;
+  padding: 13px 18px;
+  font-size: 14px;
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+.bot-body {
+  padding: 18px;
+  text-align: center;
+}
+
+.bot-widget.collapsed .bot-header,
+.bot-widget.collapsed .bot-body > *:not(.avatar-container) {
+  display: none;
+}
+
+.bot-widget.collapsed .bot-body {
+  padding: 8px;
+}
+
+.avatar-container {
+  position: relative;
+  width: 75px;
+  height: 75px;
+  margin: 0 auto 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  animation: pulse-ring 2s infinite ease-in-out;
+}
+
+.bot-avatar {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid var(--primary-blue);
+  background: #ffffff;
+}
+
+@keyframes pulse-ring {
+  0% { box-shadow: 0 0 0 0 rgba(37, 99, 235, 0.6); }
+  70% { box-shadow: 0 0 0 12px rgba(37, 99, 235, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(37, 99, 235, 0); }
+}
+
+.bot-link {
+  display: block;
+  background: #10b981;
+  color: white;
+  padding: 10px;
+  border-radius: 10px;
+  text-decoration: none;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  font-weight: 700;
+  margin-top: 10px;
+}
+
+@media (max-width: 768px) {
+  .hero-content { flex-direction: column; text-align: center; }
+  .hero-text-right { text-align: center; }
+  .options-grid { grid-template-columns: 1fr; }
+  .bot-callout { display: none; }
+  .ip-display { font-size: 1.6rem; }
+}
+</style>
+</head>
+<body>
+
+<div class="top-nav">
+  <div class="subject-badge">
+    📚 יא'7 לומדים תקשוב עם המורה סהר
+  </div>
+  <div class="nav-left-group">
+    <div class="brand-badge">
+      אקדמיית התקשוב
+    </div>
+  </div>
+</div>
+
+<!-- HERO SECTION -->
+<div class="hero-wrapper">
+  <div class="hero-content">
+    <div class="hero-text-right">
+      <h1>יא'7 לומדים תקשוב עם המורה סהר 🚀</h1>
+      <p>סימולטור בגרות בתקשוב – המפץ הגדול 💥 (מחולל שאלות דינמי ותיאוריה)</p>
+    </div>
+    <div class="hero-logos-left">
+      <img src="https://lh3.googleusercontent.com/d/1oIkZlLHZWtFgoDblyxziTALQZwsyxAOo" class="hero-logo-img" alt="לוגו 1">
+      <img src="https://lh3.googleusercontent.com/d/1vgLFfYxDKLinPryu_9dK7g7HZV7QIrnL" class="hero-logo-img" alt="לוגו 2">
+      <img src="https://lh3.googleusercontent.com/d/1va1dQzAizB784PSXU3j8j2zbvB5XYozW" class="hero-logo-img" alt="לוגו 3">
+    </div>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- MENTOR BOX -->
+  <div class="mentor-card">
+    <div class="mentor-info">
+      <span style="font-size: 38px;">🧙‍♂️</span>
+      <div>
+        <div class="mentor-title">פינת המנטור המטורלל:</div>
+        <div class="mentor-desc" id="motivationQuote">לחצו על הכפתור משמאל לקבלת זריקת אנרגיה מטורללת לבחינה!</div>
+      </div>
+    </div>
+    <button class="motivation-btn" onclick="generateMotivation()">
+      תדלק אותי במוטיבציה! ⚡
+    </button>
+  </div>
+
+  <!-- QUIZ CONTENT PANEL -->
+  <div class="quiz-panel">
+    
+    <div id="gameArea">
+      <div class="question-counter">שאלה <span id="qNum">1</span> מתוך 20</div>
+      <div id="dynamicContent"></div>
+      <div class="options-grid" id="optionsArea"></div>
+      <button class="action-btn" id="nextBtn" onclick="nextStep()">המשך לשאלה הבאה &larr;</button>
+    </div>
+
+    <div class="hidden" id="resultArea">
+      <h2 style="font-family:'Rubik', sans-serif; font-size: 2.2rem; font-weight:900;">סיכום מבדק</h2>
+      <div style="font-weight: 700; color: var(--text-muted); margin-top: 5px;">הציון הסופי שלך:</div>
+      <div class="result-score" id="finalScore">0</div>
+      
+      <div style="text-align: right; margin: 20px 0 10px; font-weight: 800; font-size: 1.2rem;">ניתוח תשובות מלא:</div>
+      <div class="review-list" id="reviewContainer"></div>
+      
+      <button class="action-btn" style="display:inline-block; margin-top:30px; background: linear-gradient(135deg, #2563eb, #1d4ed8);" onclick="initGame()">התחל מבחן חדש 🔄</button>
+    </div>
+
+  </div>
+
+</div>
+
+<!-- FLOATING BOT WIDGET CONTAINER -->
+<div class="bot-container">
+  <div class="bot-widget collapsed" id="botWidget" onclick="expandBot(event)">
+    <div class="bot-header" onclick="toggleBot(event)">
+      <span>NODE: SAHAR-BOT</span>
+      <span>✕</span>
+    </div>
+    <div class="bot-body">
+      <div class="avatar-container">
+        <img src="https://lh3.googleusercontent.com/d/1BHxytxfATgrv3wpk_8slqpRX08p2Dzml" class="bot-avatar" alt="Sahar Bot">
+      </div>
+      <div style="font-weight:800; font-size:15px; color:#0f172a;">עוזר הבגרות יא'7 🤖</div>
+      <div style="font-size:12px; color:#64748b; margin-bottom:10px;">צריך עזרה בתקשורת או בפתרון שאלת בגרות?</div>
+      <a href="https://gemini.google.com/gem/13FFjtbW5S3yg0EE1qBEQiP8GEMwoepKu?usp=sharing" target="_blank" class="bot-link">$ connect --dan-gpt</a>
+    </div>
+  </div>
+
+  <div class="bot-callout" onclick="expandBot(event)">
+    💬 דבר איתי אחי
+  </div>
+</div>
+
+<script>
+// --- מנגנון ניקוי מחרוזות ---
+function cleanStr(str) {
+    if (typeof str !== 'string') return str;
+    return str.trim().toLowerCase().replace(/\s+/g, ' ');
+}
+
+// --- מאגר שאלות תאורטי ---
+const questionBank = [
+    { q: "מהי הפעולה הראשונה שמבצע מתג (Switch) כאשר הוא מקבל Frame?", opts: ["לומד את כתובת ה-MAC של המקור ושומר בטבלה", "מעביר את המידע ליעד מיד", "בודק את כתובת ה-IP", "משנה את כתובת ה-MAC"], ans: "לומד את כתובת ה-MAC של המקור ושומר בטבלה", expl: "המתג בונה את טבלת ה-MAC שלו על ידי האזנה לכתובות המקור." },
+    { q: "מה יעשה המתג אם הוא מקבל Frame לכתובת MAC יעד שלא קיימת בטבלה שלו?", opts: ["יציף (Flood) את ה-Frame לכל הפורטים מלבד המקור", "ישליך (Drop) את ה-Frame", "ישלח הודעת שגיאה למקור", "ישלח את המידע לראוטר"], ans: "יציף (Flood) את ה-Frame לכל הפורטים מלבד המקור", expl: "הצפה נועדה למצוא את היעד הלא ידוע." },
+    { q: "כיצד מתג שומר על טבלת ה-MAC שלו עדכנית?", opts: ["מוחק רשומות שלא היו פעילות זמן מסוים (Aging Time)", "מוחק את הטבלה כל פעם שמכבים אותו", "הטבלה קבועה ולא נמחקת", "הוא מבקש אישור מהמנהל"], ans: "מוחק רשומות שלא היו פעילות זמן מסוים (Aging Time)", expl: "כתובות לא פעילות נמחקות (לרוב אחרי 300 שניות) כדי למנוע טעויות." },
+    { q: "מה עושה הראוטר עם ה-Frame כשהוא מקבל חבילה?", opts: ["מקלף (Decapsulates) את ה-Frame וזורק את הכותרת הישנה", "מעביר אותו כמו שהוא ליעד", "משנה רק את כתובת ה-MAC", "בודק שגיאות ומחזיר למקור"], ans: "מקלף (Decapsulates) את ה-Frame וזורק את הכותרת הישנה", expl: "הראוטר פותח את האריזה (L2) כדי לראות את ה-IP (L3)." },
+    { q: "מה קורה לערך ה-TTL בחבילת IP כשהיא עוברת בראוטר?", opts: ["הערך יורד ב-1", "הערך עולה ב-1", "הערך נשאר ללא שינוי", "הערך מתאפס"], ans: "הערך יורד ב-1", expl: "זהו מנגנון למניעת לולאות אינסופיות ברשת." },
+    { q: "מהי הפקודה להגדרת ניתוב סטטי?", opts: ["ip route [network] [mask] [next-hop]", "router static [network]", "ip routing [network]", "network [address]"], ans: "ip route [network] [mask] [next-hop]", expl: "תחביר: ip route רשת יעד, מסכה, ולאן לשלוח." },
+    { q: "מהי הפקודה להגדרת Default Route?", opts: ["ip route 0.0.0.0 0.0.0.0 [next-hop]", "ip default-network", "ip route default", "router rip default"], ans: "ip route 0.0.0.0 0.0.0.0 [next-hop]", expl: "המסלול של 'המוצא האחרון' לכל יעד לא ידוע." },
+    { q: "באיזו שכבה פועל הנתב (Router)?", opts: ["שכבה 3 (Network)", "שכבה 2 (Data Link)", "שכבה 4 (Transport)", "שכבה 1 (Physical)"], ans: "שכבה 3 (Network)", expl: "נתב עובד עם כתובות IP." },
+    { q: "באיזו שכבה פועל המתג (Switch)?", opts: ["שכבה 2 (Data Link)", "שכבה 3 (Network)", "שכבה 1 (Physical)", "שכבה 4 (Transport)"], ans: "שכבה 2 (Data Link)", expl: "מתג עובד עם כתובות MAC." },
+    { q: "מהי כתובת Broadcast ברמת ה-MAC?", opts: ["FF:FF:FF:FF:FF:FF", "00:00:00:00:00:00", "255.255.255.255", "192.168.1.255"], ans: "FF:FF:FF:FF:FF:FF", expl: "כתובת שמיועדת לכולם ברשת המקומית." },
+    { q: "איזה פרוטוקול מתרגם IP ל-MAC?", opts: ["ARP", "DNS", "DHCP", "NAT"], ans: "ARP", expl: "Address Resolution Protocol." },
+    { q: "מה תפקיד ה-DNS?", opts: ["תרגום שמות דומיין לכתובות IP", "חלוקת כתובות IP", "בדיקת תקשורת", "הצפנת מידע"], ans: "תרגום שמות דומיין לכתובות IP", expl: "כמו ספר טלפונים של האינטרנט." },
+    { q: "מה תפקיד שרת DHCP?", opts: ["חלוקה אוטומטית של כתובות IP והגדרות", "תרגום שמות", "ניתוב חבילות", "אבטחת מידע"], ans: "חלוקה אוטומטית של כתובות IP והגדרות", expl: "Dynamic Host Configuration Protocol." },
+    { q: "מהי כתובת APIPA?", opts: ["169.254.x.x", "10.0.0.0", "172.16.0.0", "192.168.0.0"], ans: "169.254.x.x", expl: "כתובת אוטומטית כשאין שרת DHCP זמין." },
+    { q: "מהו הטווח של Standard ACL?", opts: ["1-99", "100-199", "1000-2000", "0-50"], ans: "1-99", expl: "Standard ACL משתמש ב-1 עד 99." },
+    { q: "מה תפקיד ה-NAT?", opts: ["תרגום כתובות פרטיות לציבוריות", "הצפנת נתונים", "חלוקת עומסים", "ניתוב דינמי"], ans: "תרגום כתובות פרטיות לציבוריות", expl: "Network Address Translation." },
+    { q: "מהו Default Gateway?", opts: ["הכתובת של הראוטר שמוציא אותנו לרשתות אחרות", "השרת DNS", "כתובת המחשב עצמו", "כתובת ה-Switch"], ans: "הכתובת של הראוטר שמוציא אותנו לרשתות אחרות", expl: "השער לעולם החיצון." }
+];
+
+let currentStep = 0;
+let score = 0;
+let history = []; 
+let selectedAnswer = null;
+let currentQuestionData = {}; 
+let finalExamQuestions = [];
+
+function initGame() {
+    currentStep = 0;
+    score = 0;
+    history = [];
+    
+    document.getElementById('resultArea').classList.add('hidden');
+    document.getElementById('gameArea').classList.remove('hidden');
+
+    let dynamicQs = [];
+    for (let i = 0; i < 8; i++) {
+        dynamicQs.push(generateDynamicIPQuestion());
+    }
+
+    let shuffledStatic = [...questionBank].sort(() => Math.random() - 0.5);
+    let selectedStatic = shuffledStatic.slice(0, 12).map(q => {
+        return {
+            isDynamic: false,
+            qText: q.q,
+            options: [...q.opts].sort(() => Math.random() - 0.5),
+            correct: q.ans,
+            explanation: q.expl,
+            displayIP: null
+        };
+    });
+
+    finalExamQuestions = [...dynamicQs, ...selectedStatic];
+    finalExamQuestions.sort(() => Math.random() - 0.5);
+    
+    renderStep();
+}
+
+function generateDynamicIPQuestion() {
+    const qTypes = ['valid', 'class', 'net', 'broad', 'first', 'last', 'type'];
+    let chosenType = qTypes[Math.floor(Math.random() * qTypes.length)];
+    
+    let isTrap = Math.random() < 0.15; 
+    let ip, cidr, trapType = "";
+
+    if (isTrap) {
+        chosenType = 'valid'; 
+        if (Math.random() > 0.5) {
+            ip = [127, Math.floor(Math.random()*255), 0, 1];
+            cidr = 8;
+            trapType = "loopback";
+        } else {
+            ip = [169, 254, Math.floor(Math.random()*255), Math.floor(Math.random()*255)];
+            cidr = 16;
+            trapType = "apipa";
+        }
+    } else {
+        let rand = Math.random();
+        if (rand < 0.4) cidr = 8;
+        else if (rand < 0.8) cidr = 16;
+        else cidr = 24;
+
+        let firstOctet = Math.floor(Math.random() * 223) + 1;
+        if (firstOctet === 127) firstOctet = 10; 
+        if (firstOctet === 169) firstOctet = 170; 
+
+        ip = [firstOctet, Math.floor(Math.random()*256), Math.floor(Math.random()*256), Math.floor(Math.random()*256)];
+    }
+
+    let net = [...ip], broad = [...ip];
+    if (cidr === 8) {
+        net[1]=0; net[2]=0; net[3]=0;
+        broad[1]=255; broad[2]=255; broad[3]=255;
+    } else if (cidr === 16) {
+        net[2]=0; net[3]=0;
+        broad[2]=255; broad[3]=255;
+    } else { 
+        net[3]=0;
+        broad[3]=255;
+    }
+
+    let netStr = net.join('.');
+    let broadStr = broad.join('.');
+    let ipStr = ip.join('.');
+    
+    let validHost = (ipStr !== netStr && ipStr !== broadStr && !isTrap && ip[0] < 224);
+
+    let correct = "";
+    let qText = "";
+    
+    switch(chosenType) {
+        case 'valid':
+            qText = "האם הכתובת חוקית לשימוש כ-Host?";
+            if (trapType === "loopback") correct = "לא - זוהי כתובת Loopback";
+            else if (trapType === "apipa") correct = "לא - זוהי כתובת APIPA";
+            else correct = validHost ? "כן, כתובת חוקית" : "לא, כתובת רשת/ברודקאסט";
+            break;
+        case 'class':
+            qText = "לאיזו מחלקה (Class) שייכת הכתובת?";
+            if (ip[0] <= 126) correct = "Class A";
+            else if (ip[0] >= 128 && ip[0] <= 191) correct = "Class B";
+            else correct = "Class C";
+            break;
+        case 'net': qText = "מהי כתובת הרשת (Network ID)?"; correct = netStr; break;
+        case 'broad': qText = "מהי כתובת הברודקאסט (Broadcast)?"; correct = broadStr; break;
+        case 'first': qText = "מהי הכתובת הראשונה לשימוש?"; correct = `${net[0]}.${net[1]}.${net[2]}.${net[3]+1}`; break;
+        case 'last': qText = "מהי הכתובת האחרונה לשימוש?"; correct = `${broad[0]}.${broad[1]}.${broad[2]}.${broad[3]-1}`; break;
+        case 'type':
+            qText = "האם הכתובת פרטית (Private) או ציבורית?";
+            let isPriv = (ip[0]===10) || (ip[0]===172 && ip[1]>=16 && ip[1]<=31) || (ip[0]===192 && ip[1]===168);
+            correct = isPriv ? "פרטית (Private)" : "ציבורית (Public)";
+            break;
+    }
+
+    let opts = [correct];
+    if (chosenType === 'valid') {
+        opts.push("כן, כתובת חוקית", "לא, כתובת רשת/ברודקאסט", "לא, זוהי כתובת Loopback", "לא, זוהי כתובת APIPA");
+    } else if (chosenType === 'class') {
+        opts = ["Class A", "Class B", "Class C", "Class D"];
+    } else if (chosenType === 'type') {
+        opts = ["פרטית (Private)", "ציבורית (Public)", "שמורה (Reserved)", "Multicast"];
+    } else {
+        let parts = correct.split('.');
+        opts.push(`${parts[0]}.${parts[1]}.${parts[2]}.0`);
+        opts.push(`${parts[0]}.${parts[1]}.255.255`);
+        opts.push(`${parts[0]}.0.0.1`);
+        while (opts.length < 4) opts.push("10.10.10.10");
+    }
+    
+    opts = [...new Set(opts)].slice(0,4);
+    while (opts.length < 4) opts.push("N/A");
+    opts.sort(() => Math.random() - 0.5);
+
+    return {
+        isDynamic: true,
+        displayIP: `${ipStr} /${cidr}`,
+        qText: qText,
+        options: opts,
+        correct: correct,
+        explanation: `הכתובת ${ipStr} ב-Prefix /${cidr} היא חלק מרשת ${netStr}.`
+    };
+}
+
+function renderStep() {
+    selectedAnswer = null;
+    document.getElementById('nextBtn').style.display = 'none';
+    document.getElementById('qNum').innerText = currentStep + 1;
+
+    const dynamicContainer = document.getElementById('dynamicContent');
+    const optionsArea = document.getElementById('optionsArea');
+    dynamicContainer.innerHTML = '';
+    optionsArea.innerHTML = '';
+
+    currentQuestionData = finalExamQuestions[currentStep];
+
+    if (currentQuestionData.isDynamic) {
+        dynamicContainer.innerHTML = `
+            <div class="ip-display">${currentQuestionData.displayIP}</div>
+            <div class="q-text">${currentQuestionData.qText}</div>
+        `;
+    } else {
+        dynamicContainer.innerHTML = `
+            <div class="q-text" style="margin-top:15px;">${currentQuestionData.qText}</div>
+        `;
+    }
+
+    currentQuestionData.options.forEach(opt => {
+        const btn = document.createElement('button');
+        btn.className = 'opt-btn';
+        btn.innerText = opt;
+        btn.onclick = () => selectOption(btn, opt);
+        optionsArea.appendChild(btn);
+    });
+}
+
+function selectOption(btn, text) {
+    document.querySelectorAll('.opt-btn').forEach(b => b.classList.remove('selected'));
+    btn.classList.add('selected');
+    selectedAnswer = text;
+    document.getElementById('nextBtn').style.display = 'block';
+}
+
+function nextStep() {
+    if (!selectedAnswer) return;
+
+    const isCorrect = (cleanStr(selectedAnswer) === cleanStr(currentQuestionData.correct));
+    if (isCorrect) score++;
+
+    let qTitle = currentQuestionData.isDynamic ? 
+           `[חישוב כתובות] ${currentQuestionData.displayIP}` : 
+           `[תיאוריה]`;
+
+    history.push({
+        q: `${qTitle}<br>${currentQuestionData.qText}`,
+        userAns: selectedAnswer,
+        correctAns: currentQuestionData.correct,
+        isCorrect: isCorrect,
+        expl: currentQuestionData.explanation
+    });
+
+    currentStep++;
+
+    if (currentStep < 20) {
+        renderStep();
+    } else {
+        finishGame();
+    }
+}
+
+function finishGame() {
+    document.getElementById('gameArea').classList.add('hidden');
+    document.getElementById('resultArea').classList.remove('hidden');
+
+    const finalScore = score * 5;
+    const scoreEl = document.getElementById('finalScore');
+    scoreEl.innerText = finalScore;
+
+    if (finalScore >= 90) scoreEl.style.color = '#10b981';
+    else if (finalScore >= 60) scoreEl.style.color = '#f59e0b';
+    else scoreEl.style.color = '#ef4444';
+
+    const container = document.getElementById('reviewContainer');
+    container.innerHTML = '';
+
+    history.forEach((item, idx) => {
+        const div = document.createElement('div');
+        div.className = `review-item ${item.isCorrect ? 'correct' : 'wrong'}`;
+        div.innerHTML = `
+            <div style="font-weight:bold; margin-bottom:6px; color:#0f172a;">${idx + 1}. ${item.q}</div>
+            <div style="margin-bottom:4px;">שלך: <strong>${item.userAns}</strong> ${item.isCorrect ? '✅' : '❌'}</div>
+            ${!item.isCorrect ? `<div style="color:#10b981; font-weight:bold;">התשובה הנכונה: ${item.correctAns}</div>` : ''}
+            <div style="font-size:0.95em; color:#64748b; margin-top:6px; background:#f1f5f9; padding:6px; border-radius:6px;">💡 ${item.expl || ''}</div>
+        `;
+        container.appendChild(div);
+    });
+}
+
+// --- מנטור ובוט ---
+const quotes = [
+  "יא'7 אלופים! כל שאלה שאתם פותרים מקרבת אתכם ל-100 עגול בבגרות! 🔥",
+  "תקשורת נתונים זה לא קסם - זה היגיון ופרוטוקולים. תמשיכו להפציץ! 💪",
+  "VLANs, ACLs, IP Subnetting - קטן על תלמידי סהר! 🚀",
+  "המורה סהר גאה בכם! תעברו על השאלות והבגרות שלכם בכיס! 🏆"
+];
+
+function generateMotivation() {
+  const rand = Math.floor(Math.random() * quotes.length);
+  document.getElementById('motivationQuote').innerText = quotes[rand];
+}
+
+function toggleBot(e) {
+  e.stopPropagation();
+  document.getElementById('botWidget').classList.toggle('collapsed');
+}
+
+function expandBot(e) {
+  const widget = document.getElementById('botWidget');
+  if (widget.classList.contains('collapsed')) {
+    widget.classList.remove('collapsed');
+  }
+}
+
+// הפעלה ראשונית
+initGame();
+</script>
+
+</body>
+</html>
