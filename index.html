@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>מתרגלים ומצליחים בבגרות בתקשוב | סימולטור המפץ הגדול 2.0</title>
+<title>מתרגלים ומצליחים בבגרות בתקשוב | סימולטור 40 שאלות</title>
 
 <!-- Google Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -164,6 +164,47 @@ body {
 .hero-logo-img:nth-child(2) { animation: spinCounterClockwise 12s linear infinite; }
 .hero-logo-img:nth-child(3) { animation: spin3D 12s linear infinite; }
 
+/* ============ STUDENT NAME INPUT ============ */
+.student-input-container {
+  max-width: 1200px;
+  margin: -15px auto 25px;
+  padding: 0 20px;
+}
+
+.student-card {
+  background: #ffffff;
+  border: 2px solid var(--primary-blue);
+  border-radius: var(--radius-md);
+  padding: 15px 25px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  box-shadow: var(--shadow);
+}
+
+.student-card label {
+  font-family: 'Rubik', sans-serif;
+  font-weight: 800;
+  font-size: 16px;
+  color: var(--text-dark);
+}
+
+.student-card input {
+  flex: 1;
+  padding: 10px 16px;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  font-family: 'Assistant', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.student-card input:focus {
+  border-color: var(--primary-blue);
+}
+
 /* ============ MENTOR SECTION ============ */
 .container {
   max-width: 1200px;
@@ -272,7 +313,7 @@ body {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 15px;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
 }
 
 .opt-btn {
@@ -288,17 +329,64 @@ body {
   font-weight: 700;
 }
 
-.opt-btn:hover {
+.opt-btn:hover:not(:disabled) {
   border-color: var(--primary-blue);
   background: var(--soft-blue);
   transform: translateY(-2px);
 }
 
-.opt-btn.selected {
-  background: var(--primary-blue);
-  color: white;
-  border-color: var(--primary-blue);
-  box-shadow: 0 6px 15px rgba(37, 99, 235, 0.3);
+.opt-btn.correct-opt {
+  background: #10b981 !important;
+  color: white !important;
+  border-color: #10b981 !important;
+}
+
+.opt-btn.wrong-opt {
+  background: #ef4444 !important;
+  color: white !important;
+  border-color: #ef4444 !important;
+}
+
+/* ============ LIVE FEEDBACK BOX ============ */
+.feedback-box {
+  background: #f8fafc;
+  border: 2px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 18px 22px;
+  margin: 20px 0 25px;
+  text-align: right;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.feedback-box.correct-bg {
+  background: #f0fdf4;
+  border-color: var(--accent-green);
+}
+
+.feedback-box.wrong-bg {
+  background: #fef2f2;
+  border-color: var(--accent-red);
+}
+
+.feedback-title {
+  font-family: 'Rubik', sans-serif;
+  font-weight: 800;
+  font-size: 1.1rem;
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.feedback-desc {
+  font-size: 1rem;
+  color: var(--text-dark);
+  font-weight: 600;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 .action-btn {
@@ -330,6 +418,14 @@ body {
   font-size: 5rem;
   font-weight: 900;
   margin: 15px 0;
+}
+
+.student-display-res {
+  font-family: 'Rubik', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--primary-blue);
+  margin-bottom: 5px;
 }
 
 .review-list {
@@ -488,6 +584,7 @@ body {
   .options-grid { grid-template-columns: 1fr; }
   .bot-callout { display: none; }
   .ip-display { font-size: 1.6rem; }
+  .student-card { flex-direction: column; align-items: stretch; }
 }
 </style>
 </head>
@@ -497,10 +594,8 @@ body {
   <div class="subject-badge">
     📚 יא'7 לומדים תקשוב עם המורה סהר
   </div>
-  <div class="nav-left-group">
-    <div class="brand-badge">
-      אקדמיית התקשוב
-    </div>
+  <div class="brand-badge">
+    אקדמיית התקשוב
   </div>
 </div>
 
@@ -509,13 +604,21 @@ body {
   <div class="hero-content">
     <div class="hero-text-right">
       <h1>יא'7 לומדים תקשוב עם המורה סהר 🚀</h1>
-      <p>סימולטור בגרות בתקשוב – המפץ הגדול 💥 (מחולל שאלות דינמי ותיאוריה)</p>
+      <p>סימולטור בגרות בתקשוב – 40 שאלות מלאות 💥 (מחולל שאלות דינמי ותיאוריה)</p>
     </div>
     <div class="hero-logos-left">
       <img src="https://lh3.googleusercontent.com/d/1oIkZlLHZWtFgoDblyxziTALQZwsyxAOo" class="hero-logo-img" alt="לוגו 1">
       <img src="https://lh3.googleusercontent.com/d/1vgLFfYxDKLinPryu_9dK7g7HZV7QIrnL" class="hero-logo-img" alt="לוגו 2">
       <img src="https://lh3.googleusercontent.com/d/1va1dQzAizB784PSXU3j8j2zbvB5XYozW" class="hero-logo-img" alt="לוגו 3">
     </div>
+  </div>
+</div>
+
+<!-- STUDENT NAME FIELD -->
+<div class="student-input-container">
+  <div class="student-card">
+    <label for="studentNameInput">👤 שם התלמיד/ה:</label>
+    <input type="text" id="studentNameInput" placeholder="הכנס/י שם מלא למעקב הציון...">
   </div>
 </div>
 
@@ -539,14 +642,22 @@ body {
   <div class="quiz-panel">
     
     <div id="gameArea">
-      <div class="question-counter">שאלה <span id="qNum">1</span> מתוך 20</div>
+      <div class="question-counter">שאלה <span id="qNum">1</span> מתוך 40</div>
       <div id="dynamicContent"></div>
       <div class="options-grid" id="optionsArea"></div>
+
+      <!-- LIVE FEEDBACK BOX -->
+      <div id="feedbackContainer" class="feedback-box hidden">
+        <div class="feedback-title" id="feedbackTitle"></div>
+        <div class="feedback-desc" id="feedbackText"></div>
+      </div>
+
       <button class="action-btn" id="nextBtn" onclick="nextStep()">המשך לשאלה הבאה &larr;</button>
     </div>
 
     <div class="hidden" id="resultArea">
-      <h2 style="font-family:'Rubik', sans-serif; font-size: 2.2rem; font-weight:900;">סיכום מבדק</h2>
+      <h2 style="font-family:'Rubik', sans-serif; font-size: 2.2rem; font-weight:900;">סיכום מבדק (40 שאלות)</h2>
+      <div class="student-display-res" id="studentNameDisplay"></div>
       <div style="font-weight: 700; color: var(--text-muted); margin-top: 5px;">הציון הסופי שלך:</div>
       <div class="result-score" id="finalScore">0</div>
       
@@ -583,31 +694,55 @@ body {
 </div>
 
 <script>
-// --- מנגנון ניקוי מחרוזות ---
 function cleanStr(str) {
     if (typeof str !== 'string') return str;
     return str.trim().toLowerCase().replace(/\s+/g, ' ');
 }
 
-// --- מאגר שאלות תאורטי ---
 const questionBank = [
-    { q: "מהי הפעולה הראשונה שמבצע מתג (Switch) כאשר הוא מקבל Frame?", opts: ["לומד את כתובת ה-MAC של המקור ושומר בטבלה", "מעביר את המידע ליעד מיד", "בודק את כתובת ה-IP", "משנה את כתובת ה-MAC"], ans: "לומד את כתובת ה-MAC של המקור ושומר בטבלה", expl: "המתג בונה את טבלת ה-MAC שלו על ידי האזנה לכתובות המקור." },
-    { q: "מה יעשה המתג אם הוא מקבל Frame לכתובת MAC יעד שלא קיימת בטבלה שלו?", opts: ["יציף (Flood) את ה-Frame לכל הפורטים מלבד המקור", "ישליך (Drop) את ה-Frame", "ישלח הודעת שגיאה למקור", "ישלח את המידע לראוטר"], ans: "יציף (Flood) את ה-Frame לכל הפורטים מלבד המקור", expl: "הצפה נועדה למצוא את היעד הלא ידוע." },
-    { q: "כיצד מתג שומר על טבלת ה-MAC שלו עדכנית?", opts: ["מוחק רשומות שלא היו פעילות זמן מסוים (Aging Time)", "מוחק את הטבלה כל פעם שמכבים אותו", "הטבלה קבועה ולא נמחקת", "הוא מבקש אישור מהמנהל"], ans: "מוחק רשומות שלא היו פעילות זמן מסוים (Aging Time)", expl: "כתובות לא פעילות נמחקות (לרוב אחרי 300 שניות) כדי למנוע טעויות." },
-    { q: "מה עושה הראוטר עם ה-Frame כשהוא מקבל חבילה?", opts: ["מקלף (Decapsulates) את ה-Frame וזורק את הכותרת הישנה", "מעביר אותו כמו שהוא ליעד", "משנה רק את כתובת ה-MAC", "בודק שגיאות ומחזיר למקור"], ans: "מקלף (Decapsulates) את ה-Frame וזורק את הכותרת הישנה", expl: "הראוטר פותח את האריזה (L2) כדי לראות את ה-IP (L3)." },
-    { q: "מה קורה לערך ה-TTL בחבילת IP כשהיא עוברת בראוטר?", opts: ["הערך יורד ב-1", "הערך עולה ב-1", "הערך נשאר ללא שינוי", "הערך מתאפס"], ans: "הערך יורד ב-1", expl: "זהו מנגנון למניעת לולאות אינסופיות ברשת." },
-    { q: "מהי הפקודה להגדרת ניתוב סטטי?", opts: ["ip route [network] [mask] [next-hop]", "router static [network]", "ip routing [network]", "network [address]"], ans: "ip route [network] [mask] [next-hop]", expl: "תחביר: ip route רשת יעד, מסכה, ולאן לשלוח." },
-    { q: "מהי הפקודה להגדרת Default Route?", opts: ["ip route 0.0.0.0 0.0.0.0 [next-hop]", "ip default-network", "ip route default", "router rip default"], ans: "ip route 0.0.0.0 0.0.0.0 [next-hop]", expl: "המסלול של 'המוצא האחרון' לכל יעד לא ידוע." },
-    { q: "באיזו שכבה פועל הנתב (Router)?", opts: ["שכבה 3 (Network)", "שכבה 2 (Data Link)", "שכבה 4 (Transport)", "שכבה 1 (Physical)"], ans: "שכבה 3 (Network)", expl: "נתב עובד עם כתובות IP." },
-    { q: "באיזו שכבה פועל המתג (Switch)?", opts: ["שכבה 2 (Data Link)", "שכבה 3 (Network)", "שכבה 1 (Physical)", "שכבה 4 (Transport)"], ans: "שכבה 2 (Data Link)", expl: "מתג עובד עם כתובות MAC." },
-    { q: "מהי כתובת Broadcast ברמת ה-MAC?", opts: ["FF:FF:FF:FF:FF:FF", "00:00:00:00:00:00", "255.255.255.255", "192.168.1.255"], ans: "FF:FF:FF:FF:FF:FF", expl: "כתובת שמיועדת לכולם ברשת המקומית." },
-    { q: "איזה פרוטוקול מתרגם IP ל-MAC?", opts: ["ARP", "DNS", "DHCP", "NAT"], ans: "ARP", expl: "Address Resolution Protocol." },
-    { q: "מה תפקיד ה-DNS?", opts: ["תרגום שמות דומיין לכתובות IP", "חלוקת כתובות IP", "בדיקת תקשורת", "הצפנת מידע"], ans: "תרגום שמות דומיין לכתובות IP", expl: "כמו ספר טלפונים של האינטרנט." },
-    { q: "מה תפקיד שרת DHCP?", opts: ["חלוקה אוטומטית של כתובות IP והגדרות", "תרגום שמות", "ניתוב חבילות", "אבטחת מידע"], ans: "חלוקה אוטומטית של כתובות IP והגדרות", expl: "Dynamic Host Configuration Protocol." },
-    { q: "מהי כתובת APIPA?", opts: ["169.254.x.x", "10.0.0.0", "172.16.0.0", "192.168.0.0"], ans: "169.254.x.x", expl: "כתובת אוטומטית כשאין שרת DHCP זמין." },
-    { q: "מהו הטווח של Standard ACL?", opts: ["1-99", "100-199", "1000-2000", "0-50"], ans: "1-99", expl: "Standard ACL משתמש ב-1 עד 99." },
-    { q: "מה תפקיד ה-NAT?", opts: ["תרגום כתובות פרטיות לציבוריות", "הצפנת נתונים", "חלוקת עומסים", "ניתוב דינמי"], ans: "תרגום כתובות פרטיות לציבוריות", expl: "Network Address Translation." },
-    { q: "מהו Default Gateway?", opts: ["הכתובת של הראוטר שמוציא אותנו לרשתות אחרות", "השרת DNS", "כתובת המחשב עצמו", "כתובת ה-Switch"], ans: "הכתובת של הראוטר שמוציא אותנו לרשתות אחרות", expl: "השער לעולם החיצון." }
+    { q: "מהי הפעולה הראשונה שמבצע מתג (Switch) כאשר הוא מקבל Frame?", opts: ["לומד את כתובת ה-MAC של המקור ושומר בטבלה", "מעביר את המידע ליעד מיד", "בודק את כתובת ה-IP", "משנה את כתובת ה-MAC"], ans: "לומד את כתובת ה-MAC של המקור ושומר בטבלה", expl: "המתג בונה את טבלת ה-MAC שלו על ידי האזנה לכתובות המקור של הפרימים הנכנסים." },
+    { q: "מה יעשה המתג אם הוא מקבל Frame לכתובת MAC יעד שלא קיימת בטבלה שלו?", opts: ["יציף (Flood) את ה-Frame לכל הפורטים מלבד המקור", "ישליך (Drop) את ה-Frame", "ישלח הודעת שגיאה למקור", "ישלח את המידע לראוטר"], ans: "יציף (Flood) את ה-Frame לכל הפורטים מלבד המקור", expl: "הצפה נועדה למצוא את היעד הלא ידוע ברשת המקומית." },
+    { q: "כיצד מתג שומר על טבלת ה-MAC שלו עדכנית?", opts: ["מוחק רשומות שלא היו פעילות זמן מסוים (Aging Time)", "מוחק את הטבלה כל פעם שמכבים אותו", "הטבלה קבועה ולא נמחקת", "הוא מבקש אישור מהמנהל"], ans: "מוחק רשומות שלא היו פעילות זמן מסוים (Aging Time)", expl: "כתובות לא פעילות נמחקות (לרוב אחרי 300 שניות) כדי למנוע טעויות ניתוב ברמת L2." },
+    { q: "מה עושה הראוטר עם ה-Frame כשהוא מקבל חבילה?", opts: ["מקלף (Decapsulates) את ה-Frame וזורק את הכותרת הישנה", "מעביר אותו כמו שהוא ליעד", "משנה רק את כתובת ה-MAC", "בודק שגיאות ומחזיר למקור"], ans: "מקלף (Decapsulates) את ה-Frame וזורק את הכותרת הישנה", expl: "הראוטר פותח את מעטפת L2 כדי לבחון את כתובת ה-IP בשכבה L3 ולבצע החלטת ניתוב." },
+    { q: "מה קורה לערך ה-TTL בחבילת IP כשהיא עוברת בראוטר?", opts: ["הערך יורד ב-1", "הערך עולה ב-1", "הערך נשאר ללא שינוי", "הערך מתאפס"], ans: "הערך יורד ב-1", expl: "שדה TTL (Time to Live) מופחת ב-1 בכל דילוג נתב למניעת לולאות אינסופיות ברשת." },
+    { q: "מהי הפקודה להגדרת ניתוב סטטי?", opts: ["ip route [network] [mask] [next-hop]", "router static [network]", "ip routing [network]", "network [address]"], ans: "ip route [network] [mask] [next-hop]", expl: "תחביר פקודת ניתוב סטטי: ip route רשת יעד, מסכת רשת, וכתובת הדילוג הבא (Next-Hop)." },
+    { q: "מהי הפקודה להגדרת Default Route?", opts: ["ip route 0.0.0.0 0.0.0.0 [next-hop]", "ip default-network", "ip route default", "router rip default"], ans: "ip route 0.0.0.0 0.0.0.0 [next-hop]", expl: "זהו נתיב 'המוצא האחרון' המפנה כל תעבורה שאין עבורה מסלול ספציפי בטבלת הניתוב." },
+    { q: "באיזו שכבה פועל הנתב (Router)?", opts: ["שכבה 3 (Network)", "שכבה 2 (Data Link)", "שכבה 4 (Transport)", "שכבה 1 (Physical)"], ans: "שכבה 3 (Network)", expl: "נתב עובד בשכבת הרשת (Network Layer) ומקבל החלטות לפי כתובות IP." },
+    { q: "באיזו שכבה פועל המתג (Switch)?", opts: ["שכבה 2 (Data Link)", "שכבה 3 (Network)", "שכבה 1 (Physical)", "שכבה 4 (Transport)"], ans: "שכבה 2 (Data Link)", expl: "מתג סטנדרטי עובד בשכבת ערוץ הנתונים ומקבל החלטות לפי כתובות MAC." },
+    { q: "מהי כתובת Broadcast ברמת ה-MAC?", opts: ["FF:FF:FF:FF:FF:FF", "00:00:00:00:00:00", "255.255.255.255", "192.168.1.255"], ans: "FF:FF:FF:FF:FF:FF", expl: "כתובת MAC שכל ה-16-ים בה הם F מיועדת לכל רכיבי הרשת המקומית." },
+    { q: "איזה פרוטוקול מתרגם IP ל-MAC?", opts: ["ARP", "DNS", "DHCP", "NAT"], ans: "ARP", expl: "פרוטוקול Address Resolution Protocol מברר כתובת MAC מתאימה עבור כתובת IP ידועה." },
+    { q: "מה תפקיד ה-DNS?", opts: ["תרגום שמות דומיין לכתובות IP", "חלוקת כתובות IP", "בדיקת תקשורת", "הצפנת מידע"], ans: "תרגום שמות דומיין לכתובות IP", expl: "DNS (Domain Name System) מתרגם שמות דומיין קריאים לאדם (כמו google.com) לכתובות IP." },
+    { q: "מה תפקיד שרת DHCP?", opts: ["חלוקה אוטומטית של כתובות IP והגדרות", "תרגום שמות", "ניתוב חבילות", "אבטחת מידע"], ans: "חלוקה אוטומטית של כתובות IP והגדרות", expl: "DHCP מספק באופן אוטומטי כתובת IP, מסכת רשת, שער ברירת מחדל ושרתי DNS." },
+    { q: "מהי כתובת APIPA?", opts: ["169.254.x.x", "10.0.0.0", "172.16.0.0", "192.168.0.0"], ans: "169.254.x.x", expl: "כתובת מוצהרת אוטומטית על ידי מערכת ההפעלה כשהיא אינה מצליחה להשיג כתובת משרת DHCP." },
+    { q: "מהו הטווח של Standard ACL?", opts: ["1-99", "100-199", "1000-2000", "0-50"], ans: "1-99", expl: "Standard ACL בציוד Cisco משתמש במספרים בטווח 1-99 (ומספרי מורחב 1300-1999)." },
+    { q: "מה תפקיד ה-NAT?", opts: ["תרגום כתובות פרטיות לציבוריות", "הצפנת נתונים", "חלוקת עומסים", "ניתוב דינמי"], ans: "תרגום כתובות פרטיות לציבוריות", expl: "NAT (Network Address Translation) מאפשר למחשבים ברשת פנימית לצאת לאינטרנט עם כתובת ציבורית." },
+    { q: "מהו Default Gateway?", opts: ["הכתובת של הראוטר שמוציא אותנו לרשתות אחרות", "השרת DNS", "כתובת המחשב עצמו", "כתובת ה-Switch"], ans: "הכתובת של הראוטר שמוציא אותנו לרשתות אחרות", expl: "כתובת ממשק הנתב המקומי אליו נשלחת כל תעבורה המיועדת מחוץ לרשת הרשת המקומית." },
+    { q: "באיזו שכבה במודל OSI פועל הפרוטוקול ICMP (המשמש לפקודת Ping)?", opts: ["שכבה 3 (Network)", "שכבה 2 (Data Link)", "שכבה 4 (Transport)", "שכבה 7 (Application)"], ans: "שכבה 3 (Network)", expl: "ICMP פועל בשכבת הרשת (Layer 3) ומשמש להודעות בקרה ואבחון תקשורת (כמו Ping)." },
+    { q: "מהו תפקידו של ערוץ Trunk בין מתגים (Switches)?", opts: ["העברת תעבורה של מספר VLANs שונים דרך כבל יחיד", "הכפלת מהירות הגלישה באינטרנט", "חיבור בין הנתב לשרת ה-DHCP בלבד", "חסימת פורטים שאינם בשימוש"], ans: "העברת תעבורה של מספר VLANs שונים דרך כבל יחיד", expl: "פורט Trunk מתייג פרימים באמצעות פרוטוקול 802.1Q ומאפשר העברת תעבורת VLANs מרובים." },
+    { q: "מה מייצגת הכתובת 127.0.0.1?", opts: ["כתובת Loopback לבדיקה עצמית של מחסנית התקשורת", "כתובת Broadcast כללית", "כתובת הנתב הדיפולטיבי", "כתובת APIPA תקולה"], ans: "כתובת Loopback לבדיקה עצמית של מחסנית התקשורת", expl: "כתובת Loopback משמשת לבדיקת תקינות רכיבי התוכנה של ה-TCP/IP במחשב המקומי." },
+    { q: "מהו היתרון המרכזי של הפרוטוקול SSH על פני Telnet?", opts: ["SSH מוצפן ומאובטח, בעוד Telnet מעביר טקסט גלוי", "SSH מהיר פי 2 מ-Telnet", "SSH פועל בשכבה 2 ו-Telnet בשכבה 3", "SSH אינו דורש סיסמה כלל"], ans: "SSH מוצפן ומאובטח, בעוד Telnet מעביר טקסט גלוי", expl: "SSH הצפנה מקצה לקצה של ערוץ הניהול, בניגוד ל-Telnet המעביר שם משתמש וסיסמה בגלוי." },
+    { q: "מה מייצג הקידומת /24 בשיטת CIDR?", opts: ["מסכת רשת של 255.255.255.0", "מסכת רשת של 255.255.0.0", "מסכת רשת של 255.0.0.0", "24 כתובות IP זמינות"], ans: "מסכת רשת של 255.255.255.0", expl: "/24 פירושו 24 ביטים דלוקים (1-ים) ברצף במסכת הרשת, השווים ל-255.255.255.0." },
+    { q: "באיזו שכבה במודל TCP/IP פועלים הפרוטוקולים TCP ו-UDP?", opts: ["שכבת התחבורה (Transport)", "שכבת היישום (Application)", "שכבת הרשת (Internet)", "שכבת הגישה לרשת (Network Access)"], ans: "שכבת התחבורה (Transport)", expl: "שכבת התחבורה אחראית על מקור-ליעד, בקרת זרימה ואמינות ההעברה באמצעות TCP ו-UDP." },
+    { q: "מה ההבדל העיקרי בין TCP ל-UDP?", opts: ["TCP אמין וכולל אישור קבלה (Connection-oriented), UDP מהיר וללא אישורים", "UDP אמין יותר מ-TCP", "TCP פועל בשכבה 3 ו-UDP בשכבה 4", "אין הבדל, שניהם זהים"], ans: "TCP אמין וכולל אישור קבלה (Connection-oriented), UDP מהיר וללא אישורים", expl: "TCP מוודא הגעת כל פקטה וסדר נכון, בעוד UDP מעדיף מהירות ונפוץ בשידורי וידאו וקול." },
+    { q: "איזו פקודה מציגה את נתיב החבילה תחנה אחרי תחנה עד ליעד?", opts: ["traceroute (או tracert)", "ping", "ipconfig /all", "show ip route"], ans: "traceroute (או tracert)", expl: "פקודת traceroute משתמשת בשדה TTL כדי לגלות את כל הנתבים שבדרך אל היעד." },
+    { q: "מהו תפקיד ה-VLAN ברשת מקומית?", opts: ["חלוקת רשת פיזית למתחמי שידור (Broadcast Domains) לוגיים נפרדים", "חיבור הרשת המקומית לאינטרנט", "חלוקת כתובות IP אוטומטיות", "הגנת אנטי-ווירוס ברמת המתג"], ans: "חלוקת רשת פיזית למתחמי שידור (Broadcast Domains) לוגיים נפרדים", expl: "VLAN מפריד תעבורת שידור (Broadcast) ומשפר אבטחה וביצועים ברשת." },
+    { q: "איזו פקודה בציוד Cisco IOS מציגה את טבלת ה-MAC של המתג?", opts: ["show mac address-table", "show ip route", "show interfaces", "show running-config"], ans: "show mac address-table", expl: "פקודה זו מציגה את כתובות ה-MAC שנלמדו והפורט אליו מחובר כל התקן." },
+    { q: "מה קורה לחבילה שלא תואמת אף חוק ב-Access Control List (ACL)?", opts: ["היא נחסמת עקב חוק Implicit Deny בסוף הרשימה", "היא מועברת כרגיל", "היא נשלחת מחדש לשולח", "היא מופנית ל-DHCP"], ans: "היא נחסמת עקב חוק Implicit Deny בסוף הרשימה", expl: "בסוף כל ACL קים חוק נסתר המפיל (Deny) את כל התעבורה שלא הורשתה מפורשות." },
+    { q: "מה תפקידו של פרוטוקול STP (Spanning Tree Protocol)?", opts: ["מניעת לולאות (Loops) ברמת שכבה 2 ברשתות מתוגות", "ניתוב חבילות בין רשתות נפרדות", "הצפנת נתונים בכבלים", "ניהול כתובות IP ברשת"], ans: "מניעת לולאות (Loops) ברמת שכבה 2 ברשתות מתוגות", expl: "STP חוסם פורטים כפולים כדי למנוע סערות שידור (Broadcast Storms) ולולאות שכבה 2." },
+    { q: "מהי כתובת IP מסוג Multicast?", opts: ["כתובת המיועדת לקבוצת מארחים מוגדרת ברשת", "כתובת המיועדת לכל המכשירים ברשת", "כתובת פרטית של מחשב יחיד", "כתובת הנתב הראשי"], ans: "כתובת המיועדת לקבוצת מארחים מוגדרת ברשת", expl: "שידור Multicast (מחלקת Class D) מופץ רק לרכיבים שנרשמו לקבוצה הספציפית." },
+    { q: "איזה פורט ברירת מחדל משמש את פרוטוקול HTTP?", opts: ["80", "443", "21", "22"], ans: "80", expl: "פרוטוקול HTTP הבלתי מוצפן משתמש בפורט 80 בשכבת התחבורה." },
+    { q: "איזה פורט ברירת מחדל משמש את פרוטוקול HTTPS המאובטח?", opts: ["443", "80", "25", "53"], ans: "443", expl: "פרוטוקול HTTPS המוצפן (SSL/TLS) משתמש בפורט 443." },
+    { q: "מה פירוש המונח Subnet Mask (מסכת רשת)?", opts: ["תבנית המפרידה בין חלק הרשת (Network ID) לחלק המארח (Host ID)", "סיסמת האבטחה של הרשת", "כתובת ה-MAC של הנתב", "מספר הפורט של השרת"], ans: "תבנית המפרידה בין חלק הרשת (Network ID) לחלק המארח (Host ID)", expl: "המסכה מורה למחשב איזה חלק מכתובת ה-IP שייך לזהות הרשת ואיזה לרכיב עצמו." },
+    { q: "איזה רכיב תקשורת מחבר בין רשתות IP שונות ומנתב חבילות מידע?", opts: ["נתב (Router)", "מתג (Switch)", "מגבר (Repeater)", "כרטיס רשת (NIC)"], ans: "נתב (Router)", expl: "נתב פועל בשכבה 3 ומקשר בין רשתות IP שונות בעלות מזהי רשת שונים." },
+    { q: "מהי הפקודה ב-Cisco IOS לשמירת ההגדרות מה-RAM ל-NVRAM?", opts: ["copy running-config startup-config", "save config", "write erase", "ip route save"], ans: "copy running-config startup-config", expl: "פקודה זו מעתיקה את תצורת ההפעלה הזמנית ב-RAM אל זיכרון ה-NVRAM הבלתי נדיף." },
+    { q: "באיזו שכבה במודל OSI פועלים כבלי נחושת, סיבים אופטיים ו-Connectors?", opts: ["שכבה 1 (Physical)", "שכבה 2 (Data Link)", "שכבה 3 (Network)", "שכבה 4 (Transport)"], ans: "שכבה 1 (Physical)", expl: "השכבה הפיזית עוסקת בהעברת אותות חשמליים, אופטיים או רדיו דרך מדית התקשורת." },
+    { q: "מה מייצגת הכתובת 255.255.255.255?", opts: ["Limited Broadcast לכל המכשירים ברשת המקומית", "כתובת ברירת מחדל לנתב", "כתובת רשת של Class A", "כתובת לא חוקית בעליל"], ans: "Limited Broadcast לכל המכשירים ברשת המקומית", expl: "כתובת זו משמשת להפצת Broadcast לכל ההתקנים ברשת המקומית בלבד ולא תעבור נתב." },
+    { q: "איזה פורט מיועד להעברת קבצים בפרוטוקול FTP?", opts: ["20/21", "22", "23", "110"], ans: "20/21", expl: "פרוטוקול FTP משתמש בפורט 21 לערוץ הבקרה ובפורט 20 להעברת הנתונים עצמם." },
+    { q: "מהי הפקודה במערכת ההפעלה Windows להצגת כל הגדרות הרשת המפורטות (כולל MAC)?", opts: ["ipconfig /all", "ping -a", "netstat -r", "nslookup"], ans: "ipconfig /all", expl: "הרצת ipconfig /all מציגה את כתובות ה-IP, מסכת הרשת, שער ברירת מחדל, DNS וכתובת פיזית (MAC)." },
+    { q: "מהו תפקיד תכונת Port Security במתג Cisco?", opts: ["הגבלת גישה לפורט לפי כתובות MAC מורשות בלבד", "הצפנת התקשורת של הפורט", "חסימת וירוסים ברשת המקומית", "הגדלת רוחב הפס של הפורט"], ans: "הגבלת גישה לפורט לפי כתובות MAC מורשות בלבד", expl: "Port Security מאפשר להגדיר אילו כתובות MAC מורשות להתחבר לפורט מסוים במתג." },
+    { q: "מה תפקידו של שרת NTP (Network Time Protocol)?", opts: ["סנכרון השעון והזמן בין כל רכיבי התקשורת ברשת", "חלוקת שמות מתחם ברשת", "הצפנת נתיבי תקשורת", "שמירת גיבויים של נתבים"], ans: "סנכרון השעון והזמן בין כל רכיבי התקשורת ברשת", expl: "סנכרון זמן מדויק חיוני לניתוח לוגים של אבטחה, תעודות אבטחה וניהול אירועים ברשת." },
+    { q: "מהו היתרון המרכזי של פרוטוקול ניתוב דינמי (כמו OSPF) על פני ניתוב סטטי?", opts: ["עדכון אוטומטי של טבלת הניתוב בעת שינויים בטופולוגיית הרשת", "הוא אינו דורש משאבי מעבד וזיכרון בנתב", "הוא מאובטח יותר מניתוב סטטי", "הוא עובד ללא כתובות IP"], ans: "עדכון אוטומטי של טבלת הניתוב בעת שינויים בטופולוגיית הרשת", expl: "פרוטוקול ניתוב דינמי מזהה נפילות קווים ומחשב מסלולים חלופיים באופן אוטומטי." },
+    { q: "איזה טווח פורטים מוגדר כ-Well-Known Ports?", opts: ["0-1023", "1024-49151", "49152-65535", "1-100"], ans: "0-1023", expl: "פורטים 0 עד 1023 שמורים לשירותי רשת מוכרים וסטנדרטיים (כמו HTTP, DNS, SSH, FTP)." }
 ];
 
 let currentStep = 0;
@@ -616,6 +751,7 @@ let history = [];
 let selectedAnswer = null;
 let currentQuestionData = {}; 
 let finalExamQuestions = [];
+let answerSubmitted = false;
 
 function initGame() {
     currentStep = 0;
@@ -625,13 +761,14 @@ function initGame() {
     document.getElementById('resultArea').classList.add('hidden');
     document.getElementById('gameArea').classList.remove('hidden');
 
+    // 10 dynamic questions + 30 static questions = 40 total
     let dynamicQs = [];
-    for (let i = 0; i < 8; i++) {
+    for (let i = 0; i < 10; i++) {
         dynamicQs.push(generateDynamicIPQuestion());
     }
 
     let shuffledStatic = [...questionBank].sort(() => Math.random() - 0.5);
-    let selectedStatic = shuffledStatic.slice(0, 12).map(q => {
+    let selectedStatic = shuffledStatic.slice(0, 30).map(q => {
         return {
             isDynamic: false,
             qText: q.q,
@@ -749,13 +886,15 @@ function generateDynamicIPQuestion() {
         qText: qText,
         options: opts,
         correct: correct,
-        explanation: `הכתובת ${ipStr} ב-Prefix /${cidr} היא חלק מרשת ${netStr}.`
+        explanation: `הכתובת ${ipStr} ב-Prefix /${cidr} משתייכת לרשת ${netStr} וכתובת ה-Broadcast שלה היא ${broadStr}.`
     };
 }
 
 function renderStep() {
     selectedAnswer = null;
+    answerSubmitted = false;
     document.getElementById('nextBtn').style.display = 'none';
+    document.getElementById('feedbackContainer').classList.add('hidden');
     document.getElementById('qNum').innerText = currentStep + 1;
 
     const dynamicContainer = document.getElementById('dynamicContent');
@@ -786,17 +925,40 @@ function renderStep() {
 }
 
 function selectOption(btn, text) {
-    document.querySelectorAll('.opt-btn').forEach(b => b.classList.remove('selected'));
-    btn.classList.add('selected');
+    if (answerSubmitted) return;
+    answerSubmitted = true;
     selectedAnswer = text;
-    document.getElementById('nextBtn').style.display = 'block';
-}
-
-function nextStep() {
-    if (!selectedAnswer) return;
 
     const isCorrect = (cleanStr(selectedAnswer) === cleanStr(currentQuestionData.correct));
-    if (isCorrect) score++;
+    
+    const allBtns = document.querySelectorAll('.opt-btn');
+    allBtns.forEach(b => {
+        b.disabled = true;
+        if (cleanStr(b.innerText) === cleanStr(currentQuestionData.correct)) {
+            b.classList.add('correct-opt');
+        } else if (b === btn && !isCorrect) {
+            b.classList.add('wrong-opt');
+        }
+    });
+
+    const feedbackContainer = document.getElementById('feedbackContainer');
+    const feedbackTitle = document.getElementById('feedbackTitle');
+    const feedbackText = document.getElementById('feedbackText');
+
+    feedbackContainer.classList.remove('hidden', 'correct-bg', 'wrong-bg');
+
+    if (isCorrect) {
+        score++;
+        feedbackContainer.classList.add('correct-bg');
+        feedbackTitle.innerHTML = '✅ תשובה נכונה! כל הכבוד!';
+        feedbackTitle.style.color = 'var(--accent-green)';
+    } else {
+        feedbackContainer.classList.add('wrong-bg');
+        feedbackTitle.innerHTML = `❌ תשובה שגויה... התשובה הנכונה: <u>${currentQuestionData.correct}</u>`;
+        feedbackTitle.style.color = 'var(--accent-red)';
+    }
+
+    feedbackText.innerText = `💡 הסבר מפורט: ${currentQuestionData.explanation}`;
 
     let qTitle = currentQuestionData.isDynamic ? 
            `[חישוב כתובות] ${currentQuestionData.displayIP}` : 
@@ -810,9 +972,12 @@ function nextStep() {
         expl: currentQuestionData.explanation
     });
 
-    currentStep++;
+    document.getElementById('nextBtn').style.display = 'block';
+}
 
-    if (currentStep < 20) {
+function nextStep() {
+    currentStep++;
+    if (currentStep < 40) {
         renderStep();
     } else {
         finishGame();
@@ -823,7 +988,17 @@ function finishGame() {
     document.getElementById('gameArea').classList.add('hidden');
     document.getElementById('resultArea').classList.remove('hidden');
 
-    const finalScore = score * 5;
+    const studentName = document.getElementById('studentNameInput').value.trim();
+    const studentDisplay = document.getElementById('studentNameDisplay');
+    
+    if (studentName) {
+        studentDisplay.innerText = `לתלמיד/ה: ${studentName}`;
+    } else {
+        studentDisplay.innerText = `לתלמיד/ה: אורח/ת`;
+    }
+
+    // Calculating score out of 100 for 40 questions
+    const finalScore = Math.round((score / 40) * 100);
     const scoreEl = document.getElementById('finalScore');
     scoreEl.innerText = finalScore;
 
@@ -847,12 +1022,11 @@ function finishGame() {
     });
 }
 
-// --- מנטור ובוט ---
 const quotes = [
-  "יא'7 אלופים! כל שאלה שאתם פותרים מקרבת אתכם ל-100 עגול בבגרות! 🔥",
+  "יא'7 אלופים! 40 שאלות שקטן עליכם לעבור! 🔥",
   "תקשורת נתונים זה לא קסם - זה היגיון ופרוטוקולים. תמשיכו להפציץ! 💪",
   "VLANs, ACLs, IP Subnetting - קטן על תלמידי סהר! 🚀",
-  "המורה סהר גאה בכם! תעברו על השאלות והבגרות שלכם בכיס! 🏆"
+  "המורה סהר גאה בכם! תסיימו את המבחן וה-100 בדרך! 🏆"
 ];
 
 function generateMotivation() {
@@ -872,7 +1046,6 @@ function expandBot(e) {
   }
 }
 
-// הפעלה ראשונית
 initGame();
 </script>
 
